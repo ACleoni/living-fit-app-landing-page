@@ -1644,4 +1644,5 @@ label.form-label {
 
 #dangerAlert {
   display: none;
+  z-index: 10000
 }

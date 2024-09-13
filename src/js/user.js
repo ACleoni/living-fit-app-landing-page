@@ -1,11 +1,21 @@
-import { auth } from './firebase.config';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getCheckoutSession  } from './stripe'
+import { 
+  auth,  
+} from './firebase';
+
+import { 
+  createUserWithEmailAndPassword,
+  
+} from "firebase/auth";
+
+import { 
+  getCheckoutSession,   
+} from './checkout'
+
 import { 
   hideOverlay, 
   showOverlay,
   setErrorMessage
-} from './helpers';
+} from './functions';
 
 import { firebaseErrors } from './constants';
 
@@ -30,11 +40,11 @@ export function createUser(event) {
       }
     })
     .then((session) => {
-      hideOverlay()
+      hideOverlay();
       window.location.assign(session.url);
     })
     .catch((error) => {
-
+      hideOverlay()
       switch (error.code) {
         case firebaseErrors.EMAIL_ALREADY_EXISTS:
           setErrorMessage("This email is already in use. Please try again.");
@@ -47,3 +57,5 @@ export function createUser(event) {
       }
   });
 }
+
+

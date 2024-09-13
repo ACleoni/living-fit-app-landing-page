@@ -1,41 +1,26 @@
-import './swiper';
-import { createUser } from './user';
+import { 
+  createUser, 
+  getUser 
+} from './user';
+import {
+  initializeSwiper,
+  scrollFunction,
+  windowScroll
+} from './functions'
 
 window.createUser = createUser;
+window.getUser = getUser;
 
-// Sticky Navbar
-function windowScroll() {
-  const navbar = document.getElementById("navbar-sticky");
-  if (navbar) {
-      if (document.body.scrollTop >= 50 || document.documentElement.scrollTop >= 50) {
-          navbar.classList.add("nav-sticky");
-      } else {
-          navbar.classList.remove("nav-sticky");
-      }
-  }
-}
+window.initializeSwiper = initializeSwiper;
 
 window.addEventListener("scroll", (ev) => {
   ev.preventDefault();
   windowScroll();
 });
 
-
-
-// back-to-top
-var mybutton = document.getElementById("back-to-top");
-
 window.onscroll = function () {
   scrollFunction();
 };
-
-function scrollFunction() {
-  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-      mybutton.style.display = "block";
-  } else {
-      mybutton.style.display = "none";
-  }
-}
 
 window.topFunction = function() {
   document.body.scrollTop = 0;

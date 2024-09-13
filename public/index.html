@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
 
-    <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="60">
+    <body onload="initializeSwiper()" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="60">
 
         <!-- Loading Overlay Start -->
         <div class="overlay" id="overlay">
@@ -732,7 +732,7 @@
         <!-- cta end -->
 
         <!-- footer & cta start -->
-        <section class="footer bg-dark">
+        <!-- <section class="footer bg-dark">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 text-center text-lg-start">
@@ -805,12 +805,12 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
         <div class="footer-tagline">
             <div class="container">
                 <div class="row justify-content-between py-2">
                     <div class="col-md-6">
-                        <p class="text-white opacity-75 mb-0 fs-14"><script>document.write(new Date().getFullYear())</script> © Appexy - <a href="https://coderthemes.com/" class="text-white">Coderthemes.com</a></p>
+                        <p class="text-white opacity-75 mb-0 fs-14"><script>document.write(new Date().getFullYear())</script> © Living Fit Family - <a href="https://livingfitfamily.com/" class="text-white">livingfitfamily.com</a></p>
                     </div>
                     <div class="col-md-6 text-md-end">
                         <a href="javascript:void(0);" class="text-white opacity-75 fs-14">Terms Conditions & Policy</a>
@@ -832,26 +832,27 @@
                             <h4 class="mb-0">Welcome Back</h4>
                             <p class="text-muted fs-15">Welcome back! Please enter your details.</p>
                         </div>
-                        <div class="mb-3">
-                            <label for="emailAddress" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="emailAddress" placeholder="Your email..." />
-                        </div>
-                        <div class="mb-2">
-                            <label for="inputPasseord" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPasseord" />
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-4 pb-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Remember for 30 days
-                                </label>
+                        <form id="signin-form" onsubmit="getUser(event)">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" name="email" class="form-control" id="signinEmail" placeholder="Your email..." />
                             </div>
-                            <a href="javascript:void(0);" class="text-secondary fs-13">Forgot Password..?</a>
-                        </div>
-
-                        <a href="javascript:void(0);" class="btn btn-gradient-primary w-100" data-bs-dismiss="modal">Sign up</a>
-                        <div class="text-center">
+                            <div class="mb-2">
+                                <label for="password"  class="form-label">Password</label>
+                                <input type="password" class="form-control" name="loginPassword" id="password" />
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-4 pb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Remember for 30 days
+                                    </label>
+                                </div>
+                                <a href="javascript:void(0);" class="text-secondary fs-13">Forgot Password..?</a>
+                            </div>
+                            <button type="submit" class="btn btn-gradient-primary w-100" data-bs-dismiss="modal">Sign In</button>
+                        </form>
+                        <!-- <div class="text-center">
                             <div class="position-relative my-4">
                                 <span class="bg-soft-secondary w-100 d-inline-block" style="height: 1px;"></span>
                                 <p class="text-muted fs-15 mb-0 mt-1 bg-white px-2 position-absolute top-50 start-50 translate-middle">
@@ -875,7 +876,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -897,11 +898,11 @@
                           </div>
                           <div class="mb-3">
                               <label for="emailAddress1" class="form-label">Email Address</label>
-                              <input type="email" class="form-control" name="email" email id="email" placeholder="example@email.com" required />
+                              <input type="email" class="form-control" name="email" email id="signupEmail" placeholder="example@email.com" required />
                           </div>
                           <div class="mb-2 position-relative">
                             <label for="inputPassword2" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" id="password" required />
+                            <input type="password" class="form-control" name="password" id="loginPassword" required />
                           </div>                          
                           <div class="form-check mb-4 pb-2">
                               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
