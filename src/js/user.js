@@ -1,6 +1,13 @@
 import { auth } from './firebase.config';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getCheckoutSession  } from './stripe'
+import { 
+  hideOverlay, 
+  showOverlay,
+  setErrorMessage
+} from './helpers';
+
+import { firebaseErrors } from './constants';
 
 export function createUser(event) {
   event.preventDefault()
@@ -12,21 +19,31 @@ export function createUser(event) {
     email,
     password
   } = data
+
   createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
+    showOverlay()
       // Signed up 
       const user = userCredential.user;
       if (user !== null) {
         return getCheckoutSession();
       }
     })
-    .then((result) => {
-      console.log(result);
-      window.location.assign(result?.session?.url);
+    .then((session) => {
+      hideOverlay()
+      window.location.assign(session.url);
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
+
+      switch (error.code) {
+        case firebaseErrors.EMAIL_ALREADY_EXISTS:
+          setErrorMessage("This email is already in use. Please try again.");
+          break;
+        case firebaseErrors.WEAK_PASSWORD:
+          setErrorMessage("Password must be at least 6 characters.");
+          break;
+        default:
+          setErrorMessage("An unknown error has occured. Please try again later.")
+      }
   });
 }
