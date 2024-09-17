@@ -1,10 +1,13 @@
-import { 
-  getApp 
-} from "@firebase/app";
 import {
-  getStripePayments, 
+  getApp
+} from "@firebase/app";
+
+import {
+  getStripePayments,
   createCheckoutSession,
- } from "@invertase/firestore-stripe-payments";
+} from "@invertase/firestore-stripe-payments";
+
+import Stripe from "./stripe";
 
 export async function getCheckoutSession() {
   const app = getApp();
@@ -23,4 +26,11 @@ export async function getCheckoutSession() {
   return session
 }
 
-
+export async function getPortalSession(customer) {
+  const stripe = Stripe();
+  const session = await stripe.billingPortal.sessions.create({
+    customer: customer,
+    return_url: `${window.location.origin}?logout`
+  })
+  return session;
+}
