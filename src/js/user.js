@@ -10,7 +10,8 @@ import {
 
 import { 
   doc, 
-  getDoc 
+  getDoc,
+  setDoc
 } from "@firebase/firestore";
 
 import {
@@ -33,6 +34,7 @@ export function createUser(event) {
   const data = Object.fromEntries(formData.entries());
 
   const {
+    username,
     email,
     password
   } = data
@@ -41,8 +43,9 @@ export function createUser(event) {
     .then((userCredential) => {
       showOverlay()
       // Signed up 
-      const user = userCredential.user;
-      if (user !== null) {
+      if (userCredential.user !== null) {
+        const userRef = doc(firestore, 'users', userCredential.user.uid);
+        setDoc(userRef, { username }, { merge: true });
         return getCheckoutSession();
       }
     })
