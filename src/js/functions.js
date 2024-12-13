@@ -44,6 +44,19 @@ function windowScroll() {
   }
 }
 
+function fetchFirebaseConfig() {
+  fetch('/env')
+  .then((response) => response.json())
+  .then((env) => {
+    console.log('Environment Variables:', env)
+  })
+}
+
+function initialize() {
+  fetchFirebaseConfig()
+  initializeSwiper()
+}
+
 function initializeSwiper() {
   return new Swiper('.screen-slider', {
     modules: [Pagination],
@@ -85,5 +98,5 @@ export {
   setErrorMessage,
   scrollFunction,
   windowScroll,
-  initializeSwiper
+  initialize
 }

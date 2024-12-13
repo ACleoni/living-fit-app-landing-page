@@ -6,10 +6,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
+const envRouter = require('./routes/env');
 
 const app = express();
-
-console.log("Firebase API Key", process.env.FIREBASE_API_KEY)
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -18,5 +17,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/env', envRouter)
 
 module.exports = app;
