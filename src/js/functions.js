@@ -4,6 +4,9 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { initializeFirebase } from './firebase';
+import { initializeStripe } from './stripe';
+
+let env;
 
 // back-to-top
 let mybutton = document.getElementById("back-to-top");
@@ -48,7 +51,8 @@ function windowScroll() {
 function configureFirebase() {
   fetch('/env')
   .then((response) => response.json())
-  .then((env) => {
+  .then((envJson) => {
+      env = envJson
       const firebaseConfig = {
         apiKey: env.FIREBASE_API_KEY,
         authDomain: env.FIREBASE_AUTH_DOMAIN,
@@ -58,7 +62,9 @@ function configureFirebase() {
         messagingSenderId: env.FIREBASE_MESSAGING_SENDER_ID,
         appId: env.FIREBASE_APP_ID
       }
-      initializeFirebase(firebaseConfig)
+
+      initializeFirebase(firebaseConfig);
+      initializeStripe(env.STRIPE_API_KEY, env.STRIPE_PRICE_ID);
   });
 }
 

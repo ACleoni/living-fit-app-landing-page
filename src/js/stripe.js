@@ -1,6 +1,13 @@
 
 const stripe = require('stripe')
 
-export default function Stripe() {
-  return stripe(process.env.STRIPE_API_KEY);
+let stripeObject;
+
+function initializeStripe(apiKey, priceId) {
+  stripeObject = {
+    instance: stripe(apiKey),
+    priceId
+  }
 }
+
+export { initializeStripe, stripeObject}
