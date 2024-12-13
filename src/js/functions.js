@@ -45,31 +45,26 @@ function windowScroll() {
   }
 }
 
-function fetchFirebaseConfig() {
+function configureFirebase() {
   fetch('/env')
   .then((response) => response.json())
-  .then((env) => env);
+  .then((env) => {
+      const firebaseConfig = {
+        apiKey: env.FIREBASE_API_KEY,
+        authDomain: env.FIREBASE_AUTH_DOMAIN,
+        databaseURL: env.FIREBASE_DATABASE_URL,
+        projectId: env.FIREBASE_PROJECT_ID,
+        storageBucket: env.FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: env.FIREBASE_MESSAGING_SENDER_ID,
+        appId: env.FIREBASE_APP_ID
+      }
+      initializeFirebase(firebaseConfig)
+  });
 }
 
 function init() {
-  initializeSwiper()
-  fetchFirebaseConfig()
-  .then((config) => {
-    console.log("App config: ", config)
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-      apiKey: config.FIREBASE_API_KEY,
-      authDomain: config.FIREBASE_AUTH_DOMAIN,
-      databaseURL: config.FIREBASE_DATABASE_URL,
-      projectId: config.FIREBASE_PROJECT_ID,
-      storageBucket: config.FIREBASE_STORAGE_BUCKET,
-      messagingSenderId: config.FIREBASE_MESSAGING_SENDER_ID,
-      appId: config.FIREBASE_APP_ID
-    };
-    
-    initializeFirebase(firebaseConfig)
-  })
+  initializeSwiper();
+  configureFirebase();
 }
 
 function initializeSwiper() {
