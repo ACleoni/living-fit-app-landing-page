@@ -9,6 +9,8 @@ const indexRouter = require('./routes/index');
 
 const app = express();
 
+console.log(process.env.FIREBASE_API_KEY)
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
