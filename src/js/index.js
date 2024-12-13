@@ -1,9 +1,10 @@
 import { 
   createUser, 
-  getUser 
+  getUser
 } from './user';
 import {
   initializeSwiper,
+  init,
   scrollFunction,
   windowScroll
 } from './functions'
@@ -12,6 +13,7 @@ window.createUser = createUser;
 window.getUser = getUser;
 
 window.initializeSwiper = initializeSwiper;
+window.init = init
 
 window.addEventListener("scroll", (ev) => {
   ev.preventDefault();

@@ -17,6 +17,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/env', envRouter)
+app.use('/', envRouter)
 
 module.exports = app;

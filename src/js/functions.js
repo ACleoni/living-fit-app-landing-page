@@ -52,7 +52,7 @@ function fetchFirebaseConfig() {
   })
 }
 
-function initialize() {
+function init() {
   fetchFirebaseConfig()
   initializeSwiper()
 }
@@ -98,5 +98,5 @@ export {
   setErrorMessage,
   scrollFunction,
   windowScroll,
-  initialize
+  init
 }
