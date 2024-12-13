@@ -3,6 +3,7 @@ import Swiper from 'swiper';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { initializeFirebase } from './firebase';
 
 // back-to-top
 let mybutton = document.getElementById("back-to-top");
@@ -47,14 +48,28 @@ function windowScroll() {
 function fetchFirebaseConfig() {
   fetch('/env')
   .then((response) => response.json())
-  .then((env) => {
-    console.log('Environment Variables:', env)
-  })
+  .then((env) => env);
 }
 
 function init() {
-  fetchFirebaseConfig()
   initializeSwiper()
+  fetchFirebaseConfig()
+  .then((config) => {
+    console.log("App config: ", config)
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: config.FIREBASE_API_KEY,
+      authDomain: config.FIREBASE_AUTH_DOMAIN,
+      databaseURL: config.FIREBASE_DATABASE_URL,
+      projectId: config.FIREBASE_PROJECT_ID,
+      storageBucket: config.FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: config.FIREBASE_MESSAGING_SENDER_ID,
+      appId: config.FIREBASE_APP_ID
+    };
+    
+    initializeFirebase(firebaseConfig)
+  })
 }
 
 function initializeSwiper() {
