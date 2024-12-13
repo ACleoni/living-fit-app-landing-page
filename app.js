@@ -9,7 +9,7 @@ const indexRouter = require('./routes/index');
 
 const app = express();
 
-console.log(process.env.FIREBASE_API_KEY)
+console.log("Firebase API Key", process.env.FIREBASE_API_KEY)
 
 app.use(logger('dev'));
 app.use(express.json());
